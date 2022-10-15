@@ -1,12 +1,14 @@
 package com.midterm.project.touristguide;
 
-public class Landmark {
+import java.io.Serializable;
+
+public class Landmark implements Serializable {
     private int resourceImage;
     private String name;
     private String description;
-    private String rating;
+    private int rating;
 
-    public Landmark(int resourceImage, String name, String description, String rating) {
+    public Landmark(int resourceImage, String name, String description, int rating) {
         this.resourceImage = resourceImage;
         this.name = name;
         this.description = description;
@@ -37,11 +39,11 @@ public class Landmark {
         this.description = description;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 }

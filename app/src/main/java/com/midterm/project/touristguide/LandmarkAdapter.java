@@ -1,13 +1,17 @@
 package com.midterm.project.touristguide;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -39,7 +43,26 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         holder.imgLandmark.setImageResource(landmark.getResourceImage());
         holder.name.setText(landmark.getName());
         holder.description.setText(landmark.getDescription());
-        holder.rating.setText(landmark.getRating());
+        holder.rating.setText("Rating:"+String.valueOf(landmark.getRating()) + "/5");
+
+        holder.layoutItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext,LandmarkDetail.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("object_landmark",landmark);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.layoutItem.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(mContext.getApplicationContext(), "Hi",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -51,6 +74,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
     }
 
     public class LandMarkViewHolder extends RecyclerView.ViewHolder {
+        private CardView layoutItem;
         private ImageView imgLandmark;
         private TextView name;
         private TextView description;
@@ -58,7 +82,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
 
         public LandMarkViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            layoutItem = itemView.findViewById(R.id.layoutItem);
             imgLandmark = itemView.findViewById(R.id.image_landmark);
             name = itemView.findViewById(R.id.tv_name);
             description = itemView.findViewById(R.id.tv_description);

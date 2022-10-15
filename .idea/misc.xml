@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/TouristGuide/app/src/main/res/drawable/ic_favourite.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/TouristGuide/app/src/main/res/layout/activity_landmark_detail.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/TouristGuide/app/src/main/res/layout/activity_main.xml" value="0.2269021739130435" />
+        <entry key="..\:/AndroidStudioProjects/TouristGuide/app/src/main/res/layout/item_landmark.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/TouristGuide/app/src/main/res/menu/favourite_menu.xml" value="0.25833333333333336" />
       </map>
     </option>
   </component>

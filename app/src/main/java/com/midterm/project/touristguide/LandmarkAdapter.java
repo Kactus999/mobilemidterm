@@ -40,7 +40,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         if(landmark == null){
             return;
         }
-        holder.imgLandmark.setImageResource(landmark.getResourceImage());
+        holder.imgLandmark.setImageResource(landmark.getResourceImage()[0]);
         holder.name.setText(landmark.getName());
         holder.description.setText(landmark.getDescription());
         holder.rating.setText("Rating:"+String.valueOf(landmark.getRating()) + "/5");

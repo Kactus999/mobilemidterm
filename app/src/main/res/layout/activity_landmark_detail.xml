@@ -76,7 +76,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:src="@drawable/ic_phone_call"
-
+            android:onClick="makePhoneCallButton"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_message"
+            android:onClick="makeMessage"
             />
     </LinearLayout>
 
@@ -96,6 +103,7 @@
             android:layout_width="30dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_map"
+            android:onClick="openInMap"
             />
     </LinearLayout>
 
@@ -113,7 +121,9 @@
         <ImageView
             android:layout_width="40sp"
             android:layout_height="40sp"
-            android:src="@drawable/wikiicon"/>
+            android:src="@drawable/wikiicon"
+            android:onClick="openInBrowser"
+            />
 
 
     </LinearLayout>

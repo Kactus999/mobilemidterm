@@ -2,18 +2,22 @@ package com.midterm.project.touristguide;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +25,8 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class LandmarkDetail extends AppCompatActivity {
-
+    private static final int REQUEST_CALL = 1;
+    private static final int REQUEST_SEND = 1;
     private ViewPager2 viewPager2;
     private CircleIndicator3 circleIndicator3;
     private List<Photo> mListPhoto;
@@ -111,4 +116,49 @@ public class LandmarkDetail extends AppCompatActivity {
         super.onResume();
         handler.postDelayed(runnable,3000);
     }
+
+    public void makePhoneCallButton(View view) {
+        makePhoneCall();
+    }
+    public void makePhoneCall(){
+        if(landmark.getPhoneNumber().trim().length() > 0){
+            if(ContextCompat.checkSelfPermission(LandmarkDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(LandmarkDetail.this,new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
+            }else {
+                String dial = "tel:" + landmark.getPhoneNumber();
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+            }
+        }else {
+            Toast.makeText(LandmarkDetail.this,"Phone number not found",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_CALL){
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    makePhoneCall();
+                }else {
+                    Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
+                }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public void openInMap(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("geo:0,0?q="+landmark.getAddress()));
+        startActivity(intent);
+    }
+
+    public void openInBrowser(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(landmark.getWikipage()));
+        startActivity(intent);
+    }
+
+    public void makeMessage(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("sms:" + landmark.getPhoneNumber()));
+        startActivity(intent);
+    }
+
+
 }

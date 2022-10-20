@@ -31,7 +31,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.photoViewHol
          if(photo == null){
              return;
          }
-         holder.imgPhoto.setImageResource(photo.getImageResource());
+         holder.imgPhoto.setImageURI(photo.getImageResource());
     }
 
     @Override

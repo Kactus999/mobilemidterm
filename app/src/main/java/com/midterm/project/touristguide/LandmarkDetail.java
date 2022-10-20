@@ -15,11 +15,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
@@ -31,6 +33,8 @@ public class LandmarkDetail extends AppCompatActivity {
     private CircleIndicator3 circleIndicator3;
     private List<Photo> mListPhoto;
     private Landmark landmark;
+    private String name,des,phone,location,wiki;
+    private ArrayList<Parcelable> uris;
     private Handler handler = new Handler(Looper.getMainLooper());
     private Runnable runnable = new Runnable() {
         @Override
@@ -59,7 +63,15 @@ public class LandmarkDetail extends AppCompatActivity {
         if(bundle == null){
             return;
         }
-        landmark = (Landmark) bundle.get("object_landmark");
+        //landmark = (Landmark) bundle.get("object_landmark");
+        uris = bundle.getParcelableArrayList("imagesUri");
+        name = bundle.getString("detailName");
+        des = bundle.getString("detailDescription");
+        phone = bundle.getString("detailPhone");
+        location = bundle.getString("detailLocation");
+        wiki = bundle.getString("detailWiki");
+
+
         viewPager2.setOffscreenPageLimit(3);
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
@@ -75,11 +87,11 @@ public class LandmarkDetail extends AppCompatActivity {
         });
         viewPager2.setPageTransformer(compositePageTransformer);
 
-        //HERE
-        detailName.setText(landmark.getName());
-        detailDes.setText(landmark.getDescription());
-        detailPhone.setText("Phone Number: "+landmark.getPhoneNumber());
-        detailAddress.setText("Address: "+ landmark.getAddress());
+
+        detailName.setText(name);
+        detailDes.setText(des);
+        detailPhone.setText("Phone Number: "+phone);
+        detailAddress.setText("Address: "+ location);
         mListPhoto = getListPhoto();
         PhotoAdapter photoAdapter = new PhotoAdapter(mListPhoto);
         viewPager2.setAdapter(photoAdapter);
@@ -98,9 +110,12 @@ public class LandmarkDetail extends AppCompatActivity {
 
     private List<Photo> getListPhoto(){
         List<Photo> list = new ArrayList<>();
-        for(int i=0;i<landmark.getResourceImage().length;i++)
-        {
-            list.add(new Photo(landmark.getResourceImage()[i]));
+//        for(int i=0;i<uris.size();i++)
+//        {
+//            list.add(new Photo(uris.get(i)));
+//        }
+        for (Parcelable p : uris) {
+            list.add(new Photo((Uri) p));
         }
         return list;
     }
@@ -121,11 +136,11 @@ public class LandmarkDetail extends AppCompatActivity {
         makePhoneCall();
     }
     public void makePhoneCall(){
-        if(landmark.getPhoneNumber().trim().length() > 0){
+        if(phone.trim().length() > 0){
             if(ContextCompat.checkSelfPermission(LandmarkDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(LandmarkDetail.this,new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
             }else {
-                String dial = "tel:" + landmark.getPhoneNumber();
+                String dial = "tel:" + phone;
                 startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
             }
         }else {
@@ -136,27 +151,27 @@ public class LandmarkDetail extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == REQUEST_CALL){
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    makePhoneCall();
-                }else {
-                    Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
-                }
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                makePhoneCall();
+            }else {
+                Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
+            }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void openInMap(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("geo:0,0?q="+landmark.getAddress()));
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("geo:0,0?q="+location));
         startActivity(intent);
     }
 
     public void openInBrowser(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(landmark.getWikipage()));
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(wiki));
         startActivity(intent);
     }
 
     public void makeMessage(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("sms:" + landmark.getPhoneNumber()));
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("sms:" + phone));
         startActivity(intent);
     }
 

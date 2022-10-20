@@ -1,17 +1,19 @@
 package com.midterm.project.touristguide;
 
-public class Photo {
-    private int ImageResource;
+import android.net.Uri;
 
-    public Photo(int imageResource) {
+public class Photo {
+    private Uri ImageResource;
+
+    public Photo(Uri imageResource) {
         ImageResource = imageResource;
     }
 
-    public int getImageResource() {
+    public Uri getImageResource() {
         return ImageResource;
     }
 
-    public void setImageResource(int imageResource) {
+    public void setImageResource(Uri imageResource) {
         ImageResource = imageResource;
     }
 }

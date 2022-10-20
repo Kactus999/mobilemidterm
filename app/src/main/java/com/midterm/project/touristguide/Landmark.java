@@ -1,16 +1,18 @@
 package com.midterm.project.touristguide;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class Landmark implements Serializable {
-    private int[] resourceImage;
+    private Uri[] resourceImage;
     private String name;
     private String description;
     private int rating;
     private String wikipage;
     private String phoneNumber;
     private String address;
-    public Landmark(int[] resourceImage, String name, String description, int rating, String wikipage, String phoneNumber, String address) {
+    public Landmark(Uri[] resourceImage, String name, String description, int rating, String wikipage, String phoneNumber, String address) {
         this.resourceImage = resourceImage;
         this.name = name;
         this.description = description;
@@ -20,11 +22,11 @@ public class Landmark implements Serializable {
         this.address = address;
     }
 
-    public int[] getResourceImage() {
+    public Uri[] getResourceImage() {
         return resourceImage;
     }
 
-    public void setResourceImage(int[] resourceImage) {
+    public void setResourceImage(Uri[] resourceImage) {
         this.resourceImage = resourceImage;
     }
 

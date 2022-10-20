@@ -2,6 +2,7 @@ package com.midterm.project.touristguide;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMarkViewHolder> {
@@ -40,7 +43,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         if(landmark == null){
             return;
         }
-        holder.imgLandmark.setImageResource(landmark.getResourceImage()[0]);
+        holder.imgLandmark.setImageURI(landmark.getResourceImage()[0]);
         holder.name.setText(landmark.getName());
         holder.description.setText(landmark.getDescription());
         holder.rating.setText("Rating:"+String.valueOf(landmark.getRating()) + "/5");
@@ -49,9 +52,17 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext,LandmarkDetail.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("object_landmark",landmark);
-                intent.putExtras(bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("object_landmark",landmark);
+//                intent.putExtras(bundle);
+                ArrayList<Uri> arrayList = new ArrayList<>(Arrays.asList(landmark.getResourceImage()));
+                intent.putExtra("imagesUri", Arrays.toString(landmark.getResourceImage()));
+                intent.putParcelableArrayListExtra("imagesUri",arrayList);
+                intent.putExtra("detailName",landmark.getName());
+                intent.putExtra("detailDescription",landmark.getDescription());
+                intent.putExtra("detailPhone",landmark.getPhoneNumber());
+                intent.putExtra("detailLocation",landmark.getAddress());
+                intent.putExtra("detailWiki",landmark.getWikipage());
                 mContext.startActivity(intent);
             }
         });

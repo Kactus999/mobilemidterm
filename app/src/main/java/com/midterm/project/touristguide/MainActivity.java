@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayList<Uri> uriArrayList = new ArrayList<>();
     private static final int REAR_PERMISSION = 101;
     private int rating;
+    private boolean isClicked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,10 +191,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        ArrayList<Landmark> subList = new ArrayList<>();
         if(item.getItemId() == R.id.favbtn){
-            Toast.makeText(this,"Favourite",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this,FavouriteList.class);
-            startActivity(intent);
+            if(!isClicked){
+                for(int i=0;i<list.size();i++){
+                    if(list.get(i).isFavourite()){
+                        subList.add(new Landmark(list.get(i).getResourceImage(),list.get(i).getName(),list.get(i).getDescription(),list.get(i).getRating(),list.get(i).getWikipage(),list.get(i).getPhoneNumber(),list.get(i).getAddress(),list.get(i).isFavourite()));
+                    }
+                }
+                isClicked = true;
+                mLandmarkAdapter.setData(subList);
+                rcvLandmark.setAdapter(mLandmarkAdapter);
+            }
+            else{
+                mLandmarkAdapter.setData(list);
+                rcvLandmark.setAdapter(mLandmarkAdapter);
+                isClicked = false;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -232,8 +248,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
-    }
-    public void onCustomToggleClick(View view) {
-        Toast.makeText(this,"Added to Favourite",Toast.LENGTH_SHORT).show();
     }
 }

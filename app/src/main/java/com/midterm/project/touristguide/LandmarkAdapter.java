@@ -2,6 +2,7 @@ package com.midterm.project.touristguide;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,8 +52,9 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         holder.name.setText(landmark.getName());
         holder.description.setText(landmark.getDescription());
         holder.rating.setText("Rating:"+String.valueOf(landmark.getRating()) + "/5");
-
-
+        if(landmark.isFavourite()){
+            holder.heartButton.toggle();
+        }
 
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,12 +73,19 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
 
         });
 
-        holder.layoutItem.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.heartButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                landmark.setFavourite(!landmark.isFavourite());
-                Toast.makeText(mContext.getApplicationContext(),landmark.toString() , Toast.LENGTH_LONG).show();
-                return false;
+            public void onClick(View view) {
+                if (!landmark.isFavourite()) {
+                    landmark.setFavourite(true);
+                    Toast.makeText(mContext.getApplicationContext(), "Added to favourite", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    landmark.setFavourite(false);
+                    Toast.makeText(mContext.getApplicationContext(), "Reoved from favourite", Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
     }
@@ -93,7 +104,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         private TextView name;
         private TextView description;
         private TextView rating;
-
+        private ToggleButton heartButton;
         public LandMarkViewHolder(@NonNull View itemView) {
             super(itemView);
             layoutItem = itemView.findViewById(R.id.layoutItem);
@@ -101,6 +112,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
             name = itemView.findViewById(R.id.tv_name);
             description = itemView.findViewById(R.id.tv_description);
             rating = itemView.findViewById(R.id.rating);
+            heartButton = itemView.findViewById(R.id.favbtn);
         }
     }
 }

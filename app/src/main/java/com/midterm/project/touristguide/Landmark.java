@@ -3,6 +3,7 @@ package com.midterm.project.touristguide;
 import android.net.Uri;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Landmark implements Serializable {
     private Uri[] resourceImage;
@@ -12,7 +13,17 @@ public class Landmark implements Serializable {
     private String wikipage;
     private String phoneNumber;
     private String address;
-    public Landmark(Uri[] resourceImage, String name, String description, int rating, String wikipage, String phoneNumber, String address) {
+    private boolean isFavourite = false;
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public Landmark(Uri[] resourceImage, String name, String description, int rating, String wikipage, String phoneNumber, String address,boolean isFavourite) {
         this.resourceImage = resourceImage;
         this.name = name;
         this.description = description;
@@ -20,6 +31,7 @@ public class Landmark implements Serializable {
         this.wikipage = wikipage;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.isFavourite = isFavourite;
     }
 
     public Uri[] getResourceImage() {
@@ -76,5 +88,19 @@ public class Landmark implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Landmark{" +
+                "resourceImage=" + Arrays.toString(resourceImage) +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", rating=" + rating +
+                ", wikipage='" + wikipage + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", isFavourite=" + isFavourite +
+                '}';
     }
 }

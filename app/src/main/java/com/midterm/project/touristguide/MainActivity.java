@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private RecyclerView rcvAddItem;
     private AddItemLandMarkAdapter addItemLandMarkAdapter;
     ArrayList<Uri> uriArrayList = new ArrayList<>();
-    private static final int REAR_PERMISSION =101;
+    private static final int REAR_PERMISSION = 101;
     private int rating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public List<Landmark> getListLandmark() {
         list = new ArrayList<>();
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_1),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap1)),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap2))},"Indedenpence Palace","This is the place marking the complete victory of anti-American resistance war, libration of the South and national reunification.",5,"https://en.wikipedia.org/wiki/Independence_Palace","02838223652","135 Đ. Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh"));
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_2),getUriToDrawable(MainActivity.this,R.drawable.ducba1),getUriToDrawable(MainActivity.this,R.drawable.ducba2)},"Notre-Dame Cathedral Basilica of Saigon","Established by French colonists who initially named it the Church of Saigon (French: l'Eglise de Saïgon), the cathedral was constructed between 1863 and 1880. The name Notre-Dame Cathedral has been used since 1959. It has two bell towers, reaching a height of 58 meters",3,"https://en.wikipedia.org/wiki/Notre-Dame_Cathedral_Basilica_of_Saigon","0914122229","01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 70000"));
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_3),getUriToDrawable(MainActivity.this,R.drawable.benthanh1),getUriToDrawable(MainActivity.this,R.drawable.benthanh2)},"Bến Thành Market","Bến Thành Market (Vietnamese: Chợ Bến Thành) is located in the center of Hồ Chí Minh City, Vietnam in District 1. The market is one of the earliest surviving structures in Saigon and an important symbol of the city.",4,"https://en.wikipedia.org/wiki/B%E1%BA%BFn_Th%C3%A0nh_Market","0835210004","Lê Lợi, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh\n"));
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_4),getUriToDrawable(MainActivity.this,R.drawable.nhahat1),getUriToDrawable(MainActivity.this,R.drawable.nhahat2)},"Municipal Theatre","The Municipal Theatre of Ho Chi Minh City, also known as Saigon Municipal Opera House (Vietnamese: Nhà hát Thành phố Hồ Chí Minh), is an opera house in Ho Chi Minh City, Vietnam. It is an example of French Colonial architecture in Vietnam.",5,"https://en.wikipedia.org/wiki/Municipal_Theatre,_Ho_Chi_Minh_City","0838237419","07 Công Trường Lam Sơn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 700000"));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_1),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap1)),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap2))},"Indedenpence Palace","This is the place marking the complete victory of anti-American resistance war, libration of the South and national reunification.",5,"https://en.wikipedia.org/wiki/Independence_Palace","02838223652","135 Đ. Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh",false));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_2),getUriToDrawable(MainActivity.this,R.drawable.ducba1),getUriToDrawable(MainActivity.this,R.drawable.ducba2)},"Notre-Dame Cathedral Basilica of Saigon","Established by French colonists who initially named it the Church of Saigon (French: l'Eglise de Saïgon), the cathedral was constructed between 1863 and 1880. The name Notre-Dame Cathedral has been used since 1959. It has two bell towers, reaching a height of 58 meters",3,"https://en.wikipedia.org/wiki/Notre-Dame_Cathedral_Basilica_of_Saigon","0914122229","01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 70000",false));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_3),getUriToDrawable(MainActivity.this,R.drawable.benthanh1),getUriToDrawable(MainActivity.this,R.drawable.benthanh2)},"Bến Thành Market","Bến Thành Market (Vietnamese: Chợ Bến Thành) is located in the center of Hồ Chí Minh City, Vietnam in District 1. The market is one of the earliest surviving structures in Saigon and an important symbol of the city.",4,"https://en.wikipedia.org/wiki/B%E1%BA%BFn_Th%C3%A0nh_Market","0835210004","Lê Lợi, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh\n",false));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_4),getUriToDrawable(MainActivity.this,R.drawable.nhahat1),getUriToDrawable(MainActivity.this,R.drawable.nhahat2)},"Municipal Theatre","The Municipal Theatre of Ho Chi Minh City, also known as Saigon Municipal Opera House (Vietnamese: Nhà hát Thành phố Hồ Chí Minh), is an opera house in Ho Chi Minh City, Vietnam. It is an example of French Colonial architecture in Vietnam.",5,"https://en.wikipedia.org/wiki/Municipal_Theatre,_Ho_Chi_Minh_City","0838237419","07 Công Trường Lam Sơn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 700000",false));
 
         Collections.sort(list, new Comparator<Landmark>() {
             @Override
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 for(int i=0;i<uriArrayList.size();i++){
                     uriImages[i] = uriArrayList.get(i);
                 }
-                list.add(new Landmark(uriImages,addName.getText().toString(),addDescription.getText().toString(),rating,addWiki.getText().toString(),addPhone.getText().toString(),addAddress.getText().toString()));
+                list.add(new Landmark(uriImages,addName.getText().toString(),addDescription.getText().toString(),rating,addWiki.getText().toString(),addPhone.getText().toString(),addAddress.getText().toString(),false));
                 LandmarkAdapter mLandmarkAdapter = new LandmarkAdapter(MainActivity.this);
                 Collections.sort(list, new Comparator<Landmark>() {
                     @Override
@@ -189,8 +189,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.favourtie){
+        if(item.getItemId() == R.id.favbtn){
             Toast.makeText(this,"Favourite",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this,FavouriteList.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -230,5 +232,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+    public void onCustomToggleClick(View view) {
+        Toast.makeText(this,"Added to Favourite",Toast.LENGTH_SHORT).show();
     }
 }

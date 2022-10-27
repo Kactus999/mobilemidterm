@@ -46,6 +46,19 @@
 
 
 
+        <ToggleButton
+            android:id="@+id/favbtn"
+            android:layout_width="30dp"
+            android:height="30dp"
+            android:layout_margin="10dp"
+            android:textOn=""
+            android:textOff=""
+            android:onClick="onCustomToggleClick"
+            android:background="@drawable/toggle_selector"
+            android:layout_height="wrap_content">
+        </ToggleButton>
+
+
     </LinearLayout>
 
 

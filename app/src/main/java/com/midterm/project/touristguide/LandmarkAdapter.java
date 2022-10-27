@@ -18,11 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMarkViewHolder> {
     private Context mContext;
     private List<Landmark> mListLandmark;
-
+    private List<String> mFavouriteList;
     public LandmarkAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -34,6 +35,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
     @Override
     public LandMarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_landmark,parent,false);
+        View view_favourite = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_favourite_list,parent,false);
         return new LandMarkViewHolder(view);
     }
 
@@ -48,13 +50,12 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         holder.description.setText(landmark.getDescription());
         holder.rating.setText("Rating:"+String.valueOf(landmark.getRating()) + "/5");
 
+
+
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext,LandmarkDetail.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("object_landmark",landmark);
-//                intent.putExtras(bundle);
                 ArrayList<Uri> arrayList = new ArrayList<>(Arrays.asList(landmark.getResourceImage()));
                 intent.putExtra("imagesUri", Arrays.toString(landmark.getResourceImage()));
                 intent.putParcelableArrayListExtra("imagesUri",arrayList);
@@ -65,12 +66,14 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
                 intent.putExtra("detailWiki",landmark.getWikipage());
                 mContext.startActivity(intent);
             }
+
         });
 
         holder.layoutItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(mContext.getApplicationContext(), "Hi",Toast.LENGTH_LONG).show();
+                landmark.setFavourite(!landmark.isFavourite());
+                Toast.makeText(mContext.getApplicationContext(),landmark.toString() , Toast.LENGTH_LONG).show();
                 return false;
             }
         });

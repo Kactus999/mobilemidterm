@@ -63,7 +63,7 @@ public class LandmarkDetail extends AppCompatActivity {
         if(bundle == null){
             return;
         }
-        //landmark = (Landmark) bundle.get("object_landmark");
+
         uris = bundle.getParcelableArrayList("imagesUri");
         name = bundle.getString("detailName");
         des = bundle.getString("detailDescription");
@@ -110,10 +110,6 @@ public class LandmarkDetail extends AppCompatActivity {
 
     private List<Photo> getListPhoto(){
         List<Photo> list = new ArrayList<>();
-//        for(int i=0;i<uris.size();i++)
-//        {
-//            list.add(new Photo(uris.get(i)));
-//        }
         for (Parcelable p : uris) {
             list.add(new Photo((Uri) p));
         }

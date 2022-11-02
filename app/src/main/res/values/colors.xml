@@ -17,7 +17,8 @@
     <color name="colorRatingActive">#FDA14F</color>
     <color name="ColorRatingInactive">#C9C9D1</color>
     <color name="colorBackground">#FFE4C4</color>
-    <color name="coloritem">#81CAD6</color>
+    <color name="coloritem">#D6C9AF  </color>
     <color name="coloradd">#FDDDA7 </color>
-    <color name="colorheader">#D6C9AF</color>
+    <color name="colorheader">#C4B289 </color>
+    <color name="colorbtn">#FCDA8B </color>
 </resources>

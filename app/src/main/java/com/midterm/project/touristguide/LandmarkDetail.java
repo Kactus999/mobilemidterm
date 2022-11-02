@@ -90,8 +90,8 @@ public class LandmarkDetail extends AppCompatActivity {
 
         detailName.setText(name);
         detailDes.setText(des);
-        detailPhone.setText("Phone Number: "+phone);
-        detailAddress.setText("Address: "+ location);
+        detailPhone.setText(phone);
+        detailAddress.setText(location);
         mListPhoto = getListPhoto();
         PhotoAdapter photoAdapter = new PhotoAdapter(mListPhoto);
         viewPager2.setAdapter(photoAdapter);

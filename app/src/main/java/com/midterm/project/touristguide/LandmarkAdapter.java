@@ -8,7 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -16,20 +21,24 @@ import android.widget.ToggleButton;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMarkViewHolder> {
     private Context mContext;
     private List<Landmark> mListLandmark;
-    private List<String> mFavouriteList;
+
     public LandmarkAdapter(Context mContext) {
         this.mContext = mContext;
     }
+
+
     public void setData(List<Landmark> list){
         this.mListLandmark = list;
         notifyDataSetChanged();
@@ -51,7 +60,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         holder.imgLandmark.setImageURI(landmark.getResourceImage()[0]);
         holder.name.setText(landmark.getName());
         holder.description.setText(landmark.getDescription());
-        holder.rating.setText("Rating:"+String.valueOf(landmark.getRating()) + "/5");
+        holder.rating.setRating(landmark.getRating());
         if(landmark.isFavourite()){
             holder.heartButton.toggle();
         }
@@ -82,7 +91,7 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
                 }
                 else{
                     landmark.setFavourite(false);
-                    Toast.makeText(mContext.getApplicationContext(), "Reoved from favourite", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext.getApplicationContext(), "Removed from favourite", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -98,12 +107,14 @@ public class LandmarkAdapter extends RecyclerView.Adapter<LandmarkAdapter.LandMa
         return 0;
     }
 
+
+
     public class LandMarkViewHolder extends RecyclerView.ViewHolder {
-        private CardView layoutItem;
+        private ConstraintLayout layoutItem;
         private ImageView imgLandmark;
         private TextView name;
         private TextView description;
-        private TextView rating;
+        private RatingBar rating;
         private ToggleButton heartButton;
         public LandMarkViewHolder(@NonNull View itemView) {
             super(itemView);

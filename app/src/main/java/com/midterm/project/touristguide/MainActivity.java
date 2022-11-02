@@ -4,14 +4,18 @@ import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -61,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         floatingActionButton = findViewById(R.id.floatingButton);
         mLandmarkAdapter = new LandmarkAdapter(this);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
-        rcvLandmark.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager LinearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        rcvLandmark.setLayoutManager(LinearLayoutManager);
 
         mLandmarkAdapter.setData(getListLandmark());
         rcvLandmark.setAdapter(mLandmarkAdapter);
@@ -83,10 +87,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public List<Landmark> getListLandmark() {
         list = new ArrayList<>();
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_1),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap1)),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap2))},"Indedenpence Palace","This is the place marking the complete victory of anti-American resistance war, libration of the South and national reunification.",5,"https://en.wikipedia.org/wiki/Independence_Palace","02838223652","135 Đ. Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh",false));
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_2),getUriToDrawable(MainActivity.this,R.drawable.ducba1),getUriToDrawable(MainActivity.this,R.drawable.ducba2)},"Notre-Dame Cathedral Basilica of Saigon","Established by French colonists who initially named it the Church of Saigon (French: l'Eglise de Saïgon), the cathedral was constructed between 1863 and 1880. The name Notre-Dame Cathedral has been used since 1959. It has two bell towers, reaching a height of 58 meters",3,"https://en.wikipedia.org/wiki/Notre-Dame_Cathedral_Basilica_of_Saigon","0914122229","01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 70000",false));
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_3),getUriToDrawable(MainActivity.this,R.drawable.benthanh1),getUriToDrawable(MainActivity.this,R.drawable.benthanh2)},"Bến Thành Market","Bến Thành Market (Vietnamese: Chợ Bến Thành) is located in the center of Hồ Chí Minh City, Vietnam in District 1. The market is one of the earliest surviving structures in Saigon and an important symbol of the city.",4,"https://en.wikipedia.org/wiki/B%E1%BA%BFn_Th%C3%A0nh_Market","0835210004","Lê Lợi, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh\n",false));
-        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.picture_4),getUriToDrawable(MainActivity.this,R.drawable.nhahat1),getUriToDrawable(MainActivity.this,R.drawable.nhahat2)},"Municipal Theatre","The Municipal Theatre of Ho Chi Minh City, also known as Saigon Municipal Opera House (Vietnamese: Nhà hát Thành phố Hồ Chí Minh), is an opera house in Ho Chi Minh City, Vietnam. It is an example of French Colonial architecture in Vietnam.",5,"https://en.wikipedia.org/wiki/Municipal_Theatre,_Ho_Chi_Minh_City","0838237419","07 Công Trường Lam Sơn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 700000",false));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.doclap3),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap1)),(getUriToDrawable(MainActivity.this,R.drawable.dinhdoclap2)),(getUriToDrawable(MainActivity.this,R.drawable.picture_1))},"Indedenpence Palace","This is the place marking the complete victory of anti-American resistance war, libration of the South and national reunification.",5,"https://en.wikipedia.org/wiki/Independence_Palace","02838223652","135 Đ. Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh",false));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.ducba3),getUriToDrawable(MainActivity.this,R.drawable.ducba1),getUriToDrawable(MainActivity.this,R.drawable.ducba2),(getUriToDrawable(MainActivity.this,R.drawable.picture_2))},"Notre-Dame Cathedral\n Basilica of Saigon","Established by French colonists who initially named it the Church of Saigon, the cathedral was constructed between 1863 and 1880.",3,"https://en.wikipedia.org/wiki/Notre-Dame_Cathedral_Basilica_of_Saigon","0914122229","01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 70000",false));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.benthanh3),getUriToDrawable(MainActivity.this,R.drawable.benthanh1),getUriToDrawable(MainActivity.this,R.drawable.benthanh2),(getUriToDrawable(MainActivity.this,R.drawable.picture_3))},"Bến Thành Market","Bến Thành Market is located in the center of Hồ Chí Minh City. The market is one of the earliest surviving structures in Saigon and an important symbol of the city.",4,"https://en.wikipedia.org/wiki/B%E1%BA%BFn_Th%C3%A0nh_Market","0835210004","Lê Lợi, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh\n",false));
+        list.add(new Landmark(new Uri[]{getUriToDrawable(MainActivity.this,R.drawable.nhahat3),getUriToDrawable(MainActivity.this,R.drawable.nhahat1),getUriToDrawable(MainActivity.this,R.drawable.nhahat2),(getUriToDrawable(MainActivity.this,R.drawable.picture_4))},"Municipal Theatre","The Municipal Theatre of Ho Chi Minh City, is an opera house in Ho Chi Minh City, Vietnam. It is an example of French Colonial architecture in Vietnam.",5,"https://en.wikipedia.org/wiki/Municipal_Theatre,_Ho_Chi_Minh_City","0838237419","07 Công Trường Lam Sơn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh 700000",false));
 
         Collections.sort(list, new Comparator<Landmark>() {
             @Override
@@ -184,8 +188,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.favourite_menu,menu);
+        getMenuInflater().inflate(R.menu.favourite_menu,menu);
+
         return true ;
     }
 

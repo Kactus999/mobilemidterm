@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -31,15 +35,41 @@
         android:orientation="horizontal"
         android:gravity="center"
         >
+
         <TextView
+            android:id="@+id/detail_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/detail_Name"
-            android:textSize="24sp"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text=""
             android:textColor="@color/black"
-            android:text=""/>
+            android:textSize="24sp" />
+
+
+
     </LinearLayout>
-    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:text="OVERVIEW"
+        android:textColor="#1976D2"
+        android:textSize="18sp">
+
+    </TextView>
+</LinearLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="300dp"
+        android:layout_marginStart="40dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,8 +80,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:fontFamily="@font/baloo_da"
             android:text="Description: "
             />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
         <TextView
             android:id="@+id/detail_description"
             android:layout_width="wrap_content"
@@ -69,12 +110,29 @@
         android:layout_marginTop="12dp"
         >
         <TextView
-            android:id="@+id/detail_phone"
+            android:id="@+id/phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@color/black"
+            android:fontFamily="@font/baloo"
             android:text="Phone Number:"/>
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        >
+        <TextView
+            android:id="@+id/detail_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,12 +156,15 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:id="@+id/detail_address"
+            android:id="@+id/address"
             android:layout_width="300sp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:text="Address"
+            android:fontFamily="@font/baloo_da"
             />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="36dp"
@@ -111,6 +172,15 @@
             android:onClick="openInMap"
             />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/detail_address"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -123,6 +193,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/black"
+            android:fontFamily="@font/baloo"
             android:text="More information: "/>
         <ImageView
             android:layout_width="40sp"
@@ -135,3 +206,4 @@
     </LinearLayout>
 
 </LinearLayout>
+    </ScrollView>
